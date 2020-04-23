@@ -9,7 +9,7 @@ class Pages extends Controller
         return view('welcome_message');
     }
 
-    public function view($page = 'home')
+    public function showme($page = 'home')
     {
     }
 }
