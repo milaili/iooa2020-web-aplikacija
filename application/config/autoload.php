@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Korisnik_model','Kolegij_model','Obaveza_model','Datoteka_model');
+$autoload['model'] = array('Korisnik_model', 'Vrsta_model');

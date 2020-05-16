@@ -45,7 +45,7 @@ $data = array(
 ?>
 <?php echo form_password($data); ?>
 </p>
-<br />
+<br /> 
 <p>
  
     <?php $data = array(
