@@ -1,6 +1,22 @@
 <?php
 class Korisnici extends CI_Controller{
-    
+
+	
+	public function index(){
+        
+        $korisnik_id = $this->session->userdata('korisnik_id');
+        $data['korisnici'] = $this->Korisnik_model->get_korisnik($korisnik_id);
+        $data['main_content'] = 'korisnici/index';
+		$this->load->view('layouts/main',$data);
+
+    }
+    public function prikaz($korisnik_id){
+        $data['korisnik'] = $this->Korisnik_model->get_korisnik($korisnik_id);
+ 
+        $data['main_content'] = 'korisnici/prikaz';
+        $this->load->view('layouts/main',$data);
+     }
+        
     public function registracija(){
         if($this->session->userdata('logged_in')){
             redirect('home/index');
@@ -34,7 +50,6 @@ class Korisnici extends CI_Controller{
         
 			$this->load->view('layouts/main', $data);
 
-            $this->session->set_flashdata('login_failed', 'Pogrešan unos korisničog imena ili lozinke. Pokušajte opet.');
             redirect('pocetna/index');
         } else {
            $username = $this->input->post('username');
@@ -51,10 +66,10 @@ class Korisnici extends CI_Controller{
                 );
                $this->session->set_userdata($korisnicki_podaci);
                      
-               $this->session->set_flashdata('login_success', 'Uspješno ste se prijavili');
+               $this->session->set_flashdata('msg', 'Uspješno ste se prijavili');
                redirect('pocetna/index');
             } else {
-                $this->session->set_flashdata('login_failed', 'Pogrešan unos korisničog imena ili lozinke. Pokušajte opet');
+                $this->session->set_flashdata('msg', '*Pogrešan unos korisničog imena ili lozinke. Pokušajte opet!*');
                 redirect('pocetna/index');
             }
         }
@@ -67,9 +82,42 @@ class Korisnici extends CI_Controller{
         $this->session->unset_userdata('username');
         $this->session->sess_destroy();
         
-        $this->session->set_flashdata('logged_out', 'Uspješno ste se odjavili');
+        $this->session->set_flashdata('msg', 'Uspješno ste se odjavili');
         redirect('pocetna/index');
     }
-    
-    
+
+
+	public function izmjena ($korisnik_id){
+		$this->form_validation->set_rules('ime_korisnika','Ime_korisnika','trim|required');
+		$this->form_validation->set_rules('prezime_korisnika','Prezime_korisnika','trim|required');
+		$this->form_validation->set_rules('email_korisnika','Email_korisnika','trim|required');
+		$this->form_validation->set_rules('korisnicko_ime','Korisnicko_ime','trim|required');
+	//	$this->form_validation->set_rules('lozinka','Lozinka','trim|required');
+        
+        if($this->form_validation->run() == FALSE){
+            $data['korisnik'] = $this->Korisnik_model->get_korisnik($korisnik_id);
+            $data['main_content'] = 'korisnici/index';
+            $this->load->view('layouts/main',$data);  
+        } else {
+
+            $data = array(             
+				'ime_korisnika'  => $this->input->post('ime_korisnika'),
+				'prezime_korisnika'  => $this->input->post('prezime_korisnika'),
+				'email_korisnika'  => $this->input->post('email_korisnika'),
+				'korisnicko_ime'  => $this->input->post('korisnicko_ime'),
+				//'lozinka'  => $this->input->post('lozinka'),
+
+            );
+           if($this->Korisnik_model->izmijeni_korisnika($korisnik_id,$data)){      
+                $this->session->set_flashdata('korisnik_izmijenjen', 'Vaši podaci su uspješno izmijenjeni');
+                redirect('korisnici/index');
+           }
+        }
+	}
+	
+        public function brisanje($korisnik_id){      
+            $this->Korisnik_model->obrisi_korisnika($korisnik_id);
+            $this->session->set_flashdata('korisnik_obrisan', 'Vaši profil je obrisan!');        
+            redirect('korisnici/index');
+     }
 }

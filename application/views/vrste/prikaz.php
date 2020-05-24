@@ -9,4 +9,3 @@
 <?php if($this->session->flashdata('vrsta_izmijenjena')) : ?>
     <?php echo '<p class="text-success">' .$this->session->flashdata('vrsta_izmijenjena') . '</p>'; ?>
 <?php endif; ?>
-
