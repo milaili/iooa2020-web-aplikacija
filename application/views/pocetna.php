@@ -13,29 +13,16 @@
 <?php endif; ?>
 
 
-
-
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-          <div style="margin:10 10 3px 3px;">
-
-			<?php $this->load->view('korisnici/login'); ?>
-          </div>
-          </div>
-				</div>
-
-<div class="offset4">
-	<h1>Dobrodošli!</h1>
-	<p>Aplikacija za praćenje sportskih aktivnosti</p>
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-xs-2 sidenav">
+		<?php $this->load->view('korisnici/login'); ?>
+    </div>
+    <div class="col-sm-8 text-left"> 
+		<h1>Dobrodošli!</h1>
+		<p>Aplikacija za praćenje sportskih aktivnosti</p>
+    </div>
+  </div>
 </div>
-</div><!--/row-->
-      <hr>
 
-      <footer>
-        <p>&copy; Copyright 2020</p>
-      </footer>
-    </div><!--/.fluid-container-->
-</body>
-</html>
+

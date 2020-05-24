@@ -1,53 +1,127 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<a href="index.php"><title>Praćenje sportskih aktivnosti</title></a>
-<link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <title>Sportske aktivnosti</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 30px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+	  padding: 7px;
+	  bottom: 0;
+	  position: fixed;
+	  left: 0;
+	  bottom: 0;
+	  width: 100%;
+	  text-align: center;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
 </head>
 <body>
- <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="<?php echo base_url(); ?>">LOGO</a>
-          <div class="nav-collapse collapse">
-            <div style="position:absolute; left:1500px; top:5px;"><p class="navbar-text pull-right">
 
-              <?php if($this->session->userdata('logged_in')) : ?>
-               <?php echo $this->session->userdata('username'); ?>
-						 
-							 <?php else : ?>
-								<a href="<?php echo base_url(); ?>korisnici/registracija">Registracija</a></li>
-            
-             <?php endif; ?>
-            </p>
-            </div>
-            <ul class="nav">
-              <li><a href="<?php echo base_url(); ?>">Početna</a></li>
-              <?php if($this->session->userdata('logged_in')) : ?>
-                    <li><a href="<?php echo base_url(); ?>vrste/index">Aktivnosti</a></li>  
-               <?php endif; ?>
-							 
-							</ul>
-          </div>
-        </div>
-      </div>
-    </div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
 
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">LOGO</a>
+	</div>
+	
+    <ul class="nav navbar-nav">
+	  <li class="active"><a href="<?php echo base_url(); ?>">Početna</a></li>
+	  <?php if($this->session->userdata('logged_in')) : ?>
 
-
-        <div class="span9">
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje aktivnosti <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Pregled</a></li>
+          <li><a href="#">Unos</a></li>
+         
+        </ul>
+	  </li>
+	  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Vrste aktivnosti <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="<?php echo base_url(); ?>vrste">Vrste aktivnosti</a></li>
+          <li><a href="<?php echo base_url(); ?>vrste/unos">Nova vrstra aktivnosti</a></li>
   
-			<?php $this->load->view($main_content); ?>
-        </div>
-		</div>
-      
+        </ul>
+	  </li>
+	</ul>
 
-     
-    </div>
+
+
+		  
+	<ul class="nav navbar-nav navbar-right">
+	  <li class="dropdown"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
+	  <?php echo $this->session->userdata('username');  ?> <span class="caret"></span> </a>
+          <ul class="dropdown-menu">
+				<li><?= anchor('user/account', 'Moj račun') ?></li>
+				<li class="divider"></li>
+				<li><?= anchor('korisnici/logout', 'Odjava') ?></li>
+			</ul>
+					
+					
+	<?php else : ?>  
+		
+
+        
+	<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+
+	</ul>
+	
+	
+	<?php endif; ?>
+
+	
+
+  </div>
+	</nav>
+	
+	<div class="container-fluid text-center">    
+  	<div class="row content">
+    	<div class="col-sm-8 text-left"> 
+
+ 			  <?php $this->load->view($main_content); ?>
+
+			</div>
+		</div>
+</div>
+
+
+<footer class="container-fluid text-center">
+  <p>&copy; Copyright 2020</p>
+</footer>
+
 </body>
 </html>

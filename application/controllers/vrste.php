@@ -24,7 +24,7 @@ class Vrste extends CI_Controller {
     
     
     public function unos(){
-        $this->form_validation->set_rules('naziv_vrste_aktivnosti','Naziv_vrste_aktivnosti','trim|required');
+        $this->form_validation->set_rules('naziv_vrste_aktivnosti','Naziv','trim|required');
   
               
         if($this->form_validation->run() == FALSE){
@@ -34,7 +34,7 @@ class Vrste extends CI_Controller {
 
             $data = array(             
                 'naziv_vrste_aktivnosti'    => $this->input->post('naziv_vrste_aktivnosti'),
-             
+				'id_korisnika' => $this->session->userdata('korisnik_id')
                
             );
            if($this->Vrsta_model->kreiraj_vrstu($data)){
@@ -45,7 +45,7 @@ class Vrste extends CI_Controller {
     }
     
     public function izmjena($id_vrste_aktivnosti){
-        $this->form_validation->set_rules('naziv_vrste_aktivnosti','Naziv_vrste_aktivnosti','trim|required');
+        $this->form_validation->set_rules('naziv_vrste_aktivnosti','Naziv','trim|required');
 
         
         if($this->form_validation->run() == FALSE){
@@ -55,7 +55,7 @@ class Vrste extends CI_Controller {
         } else {
 
             $data = array(             
-                'naziv_vrste_aktivnosti'    => $this->input->post('naziv_vrste_aktivnosti'),
+                'naziv_vrste_aktivnosti'  => $this->input->post('naziv_vrste_aktivnosti'),
 
             );
            if($this->Vrsta_model->izmijeni_vrstu($id_vrste_aktivnosti,$data)){      
@@ -63,10 +63,11 @@ class Vrste extends CI_Controller {
                 redirect('vrste/index');
            }
         }
-    }
+	}
+	
         public function brisanje($id_vrste_aktivnosti){      
             $this->Vrsta_model->obrisi_vrstu($id_vrste_aktivnosti);
-            $this->session->set_flashdata('vrsta_obrisana', 'Vrsta aktivnosti je obrisan');        
+            $this->session->set_flashdata('vrsta_obrisana', 'Vrsta aktivnosti je obrisana!');        
             redirect('vrste/index');
      }
  
