@@ -4,15 +4,9 @@ Aplikacija za praćenje sportskih aktivnosti
 
 
 Tehnologije:
-<<<<<<< HEAD
-CodeIgniter razvojni okvir
-MySql baza podataka
-Bootstrap CSS
-=======
-|CodeIgniter razvojni okvir
-|MySql baza podataka
-|Bootstrap CSS
->>>>>>> master
+| CodeIgniter razvojni okvir
+| MySql baza podataka
+| Bootstrap CSS
 
 
 Namjena: korisniku radi lakše evidencije vlastitih sportskih aktivnosti te pregled ukupno utrošenog vremena u određenom periodu.
