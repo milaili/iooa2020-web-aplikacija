@@ -44,4 +44,28 @@ class Aktivnosti2 extends CI_Controller {
         redirect('aktivnosti2');
     }
 
+    public function skeyword() {
+        $this->form_validation->set_rules('datum_aktivnosti1', 'datum_aktivnosti1', 'trim|required');
+        $this->form_validation->set_rules('datum_aktivnosti2', 'datum_aktivnosti2', 'trim|required');
+        $this->form_validation->set_rules('id_vrste_aktivnosti', 'id_vrste_aktivnosti', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $korisnik_id = $this->session->userdata('korisnik_id');
+            $data['vrsta'] = $this->aktivnosti_model->get_vrsta($korisnik_id);
+            $data['main_content'] = 'aktivnosti/aktivnost_view';
+            $this->load->view('layouts/main', $data);
+        } else {
+            $korisnik_id = $this->session->userdata('korisnik_id');
+            $min = $this->input->post('datum_aktivnosti1');
+            $max = $this->input->post('datum_aktivnosti2');
+            $id_vrste_aktivnosti = $this->input->post('id_vrste_aktivnosti');
+            $data['aktivnosti'] = $this->aktivnosti_model->search($korisnik_id, $min, $max, $id_vrste_aktivnosti);
+            $data['ukupno'] = $this->aktivnosti_model->trajanje($korisnik_id, $min, $max, $id_vrste_aktivnosti);
+
+            $data['main_content'] = 'aktivnosti/skeyview';
+            $this->load->view('layouts/main', $data);
+        }
+    }
+
 }

@@ -9,7 +9,7 @@ class Vrste extends CI_Controller {
             redirect('pocetna/index');
         }
     }
-
+    
     public function index() {
 
         $korisnik_id = $this->session->userdata('korisnik_id');
