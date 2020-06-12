@@ -8,7 +8,7 @@ class Vrste extends CI_Controller {
             $this->session->set_flashdata('need_login', 'Morate se prijaviti');
             redirect('pocetna/index');
         }
-    }
+    }S
 
     public function index() {
 

@@ -21,7 +21,7 @@ $data = array("value" => "Izmijeni",
     "class" => "btn btn-primary");
 ?>
 <p>
-<?php echo form_submit($data); ?>
+    <?php echo form_submit($data); ?>
 </p>
 <hr/>
 /* <a onclick="return confirm('Da li ste sigurni?')" href="<?php echo base_url(); ?>korisnici/brisanje/<?php echo $ovaj_korisnik->korisnik_id; ?>">Obriši svoj profil</a>*/

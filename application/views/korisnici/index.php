@@ -3,8 +3,8 @@
     <?php echo validation_errors('<p class="text-error">'); ?>
     <div class="container">
 
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-8">
+        <div class="row">
+            <div class="col col-md-5">
 
 
                 <h3>Vaši podaci</h3>
@@ -27,7 +27,8 @@
                         $data = array(
                             'name' => 'ime_korisnika',
                             'value' => $korisnik->ime_korisnika,
-                            'type' => 'text'
+                            'type' => 'text',
+                            "class" => "form-control"
                         );
                         ?>
                         <?php echo form_input($data); ?>
@@ -40,7 +41,8 @@
                         <?php
                         $data = array(
                             'name' => 'prezime_korisnika',
-                            'value' => $korisnik->prezime_korisnika
+                            'value' => $korisnik->prezime_korisnika,
+                            "class" => "form-control"
                         );
                         ?>
                         <?php echo form_input($data); ?>
@@ -52,7 +54,8 @@
                         <?php
                         $data = array(
                             'name' => 'email_korisnika',
-                            'value' => $korisnik->email_korisnika
+                            'value' => $korisnik->email_korisnika,
+                            "class" => "form-control"
                         );
                         ?>
                         <?php echo form_input($data); ?>
@@ -64,7 +67,8 @@
                         <?php
                         $data = array(
                             'name' => 'korisnicko_ime',
-                            'value' => $korisnik->korisnicko_ime
+                            'value' => $korisnik->korisnicko_ime,
+                            "class" => "form-control"
                         );
                         ?>
                         <?php echo form_input($data); ?>
@@ -76,16 +80,14 @@
                         "class" => "btn btn-primary");
                     ?>
                     <p>
-                    <?php echo form_submit($data); ?>
+                        <?php echo form_submit($data); ?>
                     </p>
-    <?php echo form_close(); ?>
-<?php endforeach; ?>
+                    <?php echo form_close(); ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
 </body>
-<!-- <a onclick="return confirm('Da li ste sigurni?')" href="<?php echo base_url(); ?>korisnici/brisanje/<?php echo $ovaj_korisnik->korisnik_id; ?>">Obriši svoj profil</a> 
-
 
 
 

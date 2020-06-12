@@ -98,12 +98,12 @@
                 "class" => "btn btn-primary");
             ?>
 
-<?php echo form_submit($data); ?>
+            <?php echo form_submit($data); ?>
 
 
     </div>
 
-<?php echo form_close(); ?>
+    <?php echo form_close(); ?>
 
 
 </body>

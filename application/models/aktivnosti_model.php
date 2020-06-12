@@ -15,7 +15,7 @@ class Aktivnosti_model extends CI_Model {
         $this->datatables->from('aktivnost a');
         $this->datatables->join('vrsta_aktivnosti b', 'a.id_vrsta=b.id_vrste_aktivnosti');
         $this->db->where('a.id_korisnika', $korisnik_id);
-        $this->datatables->add_column('view', '<a href="javascript:void(0);" class="edit_record btn btn-info" data-id="$1" data-datum="$2" data-trajanje="$3" data-vrsta="$4" data-komentar="$5" data-korisnik="$6">Edit</a>  <a href="javascript:void(0);" class="delete_record btn btn-danger" data-id="$1">Delete</a>', 'id_aktivnosti,datum_aktivnosti,trajanje_aktivnosti,naziv_vrste_aktivnosti,komentar_aktivnosti, id_korisnika');
+        $this->datatables->add_column('view', '<a href="javascript:void(0);" class="edit_record btn btn-info" data-id="$1" data-datum="$2" data-trajanje="$3" data-vrsta="$4" data-komentar="$5" data-korisnik="$6">Izmijeni</a>  <a href="javascript:void(0);" class="delete_record btn btn-danger" data-id="$1">Obriši</a>', 'id_aktivnosti,datum_aktivnosti,trajanje_aktivnosti,naziv_vrste_aktivnosti,komentar_aktivnosti, id_korisnika');
         return $this->datatables->generate();
     }
 
@@ -54,11 +54,48 @@ class Aktivnosti_model extends CI_Model {
         return $result;
     }
 
-    function range() {
+    // search data range
+    public function total($min, $max) {
 
+        $this->db->where('datum_aktivnosti >=', $min);
+        $this->db->where('datum_aktivnosti <=', $max);
+        // $this->db->where('id_korisnika', $korisnik_id);
 
-        $this->db->where("DATE_FORMAT(date, '%d-%m-%Y') < ", "DATE_FORMAT('$date1', '%d-%m-%Y')");
-        $this->db->where("DATE_FORMAT(date, '%d-%m-%Y') > ", "DATE_FORMAT('$date2', '%d-%m-%Y')");
+        return $this->db->get('SUM(trajanje_aktivnosti)');
+        //  $query = [select sum(trajanje_aktivnosti) from aktivnost where aktivnost.datum_aktivnosti between '2020-06-02' and '2020-06-11'];
+    }
+
+    public function search($korisnik_id, $min, $max, $id_vrste_aktivnosti) {
+        $this->db->select('a.id_aktivnosti, a.datum_aktivnosti, a.trajanje_aktivnosti, b.naziv_vrste_aktivnosti, a.komentar_aktivnosti');
+        $this->db->from('aktivnost a');
+        $this->db->join('vrsta_aktivnosti b', 'a.id_vrsta=b.id_vrste_aktivnosti');
+        $this->db->where('a.id_korisnika', $korisnik_id);
+        $this->db->where('b.id_vrste_aktivnosti', $id_vrste_aktivnosti);
+        $this->db->where('a.datum_aktivnosti >=', $min);
+        $this->db->where('a.datum_aktivnosti <=', $max);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function trajanje_ukupno($korisnik_id, $min, $max) {
+        $this->db->select_sum('trajanje_aktivnosti');
+        $this->db->where('datum_aktivnosti >=', $min);
+        $this->db->where('datum_aktivnosti <=', $max);
+        $this->db->where('id_korisnika', $korisnik_id);
+        $query = $this->db->get('aktivnost');
+        return $query->result();
+    }
+
+    public function trajanje($korisnik_id, $min, $max, $id_vrste_aktivnosti) {
+        $this->db->select_sum('a.trajanje_aktivnosti');
+        $this->db->from('aktivnost a');
+        $this->db->join('vrsta_aktivnosti b', 'a.id_vrsta=b.id_vrste_aktivnosti');
+        $this->db->where('a.id_korisnika', $korisnik_id);
+        $this->db->where('b.id_vrste_aktivnosti', $id_vrste_aktivnosti);
+        $this->db->where('a.datum_aktivnosti >=', $min);
+        $this->db->where('a.datum_aktivnosti <=', $max);
+        $query = $this->db->get();
+        return $query->result();
     }
 
 }
