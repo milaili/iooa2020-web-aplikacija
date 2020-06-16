@@ -40,7 +40,7 @@ class Vrste extends CI_Controller {
             );
             if ($this->Vrsta_model->kreiraj_vrstu($data)) {
                 $this->session->set_flashdata('msg', '<div class="alert alert-success">Dodali ste novu vrstu aktivnosti</div>');
-                redirect('vrste/unos');
+                redirect('vrste/index');
             }
         }
     }

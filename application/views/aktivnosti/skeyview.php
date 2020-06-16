@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Izračuni</title>
-    </head>
+<head>
+<style>
+thead {color: green;}
+tbody {color: blue;}
+tfoot {color: red; back}
+
+</style>
+</head>
 
     <body>
         <br>
+        <div class="container">
+        <h2>Izračuni</h2>
+<hr/>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>DATUM</th>
-                    <th>TRAJANJE</th>
                     <th>KOMENTAR</th>
+                    <th>TRAJANJE U MINUTAMA</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +40,7 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td><label>UKUPNO MINUTA: </label><?php echo $row->trajanje_aktivnosti; ?></td>
+                        <td><label>UKUPNO: </label><?php echo " ". $row->trajanje_aktivnosti; ?></td>
 
 
                     </tr>
@@ -40,7 +48,7 @@
             <?php } ?>
 
         </table>
-
+</div>
 
 
     </body>
