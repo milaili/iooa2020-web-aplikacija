@@ -18,7 +18,9 @@ Namjena: korisniku radi lakše evidencije vlastitih sportskih aktivnosti te preg
 <a href="https://ibb.co/3Y0Ndtq"><img src="https://i.ibb.co/rfZ60nS/2.jpg" alt="2" border="0"></a>
 <h3>Filter data by range and category</h3>
 <a href="https://ibb.co/Y7b6w9V"><img src="https://i.ibb.co/pvng5Dk/3.jpg" alt="3" border="0"></a>
-<h3>Forms</h3>
+<h3>SUM column</h3>
+<a href="https://ibb.co/TcYJNbM"><img src="https://i.ibb.co/jhbqjWk/6.jpg" alt="6" border="0"></a>
+<h3>Editable forms</h3>
 <a href="https://ibb.co/J57fzwz"><img src="https://i.ibb.co/cDFGNSN/4.jpg" alt="4" border="0"></a>
 
 *******************
